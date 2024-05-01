@@ -15,7 +15,7 @@ while true; do
     read yn
 
     case $yn in
-        y | Y | yes ) echo "Installing general purpose utilities...";
+        y | Y | yes | "" ) echo "Installing general purpose utilities...";
             utils="yes";
             break;;
 
@@ -29,13 +29,13 @@ done
 
 if [ $utils = "yes" ]; then
     # Note: timeshift requires cronie which conflicts with fcron
-    yay -S pacseek btop ncdu timeshift
+    yay -S pacseek btop ncdu timeshift;
 fi
 
 
 # TeX installation and packages
 while true; do
-    if [[$1 = "all" ]]; then
+    if [[ $1 = "all" ]]; then
         echo "Installing texlive-full...";
         yay -S texlive-full;
         break;
@@ -43,7 +43,7 @@ while true; do
 
     echo "Do you want to install TeX?";
     echo "(If you don't know what this is, skip it.)";
-    echo "0. Skip";
+    echo "0. Skip (Default)";
     echo "1. Basic (only texlive-basic)";
     echo "2. Recommended";
     echo "3. Full";
@@ -52,14 +52,14 @@ while true; do
     read yn
 
     case $yn in
-        0 ) echo "Skipping TeX installation.";
+        0 | "" ) echo "Skipping TeX installation.";
             break;;
 
         1 ) echo "Installing texlive-basic.";
             break;;
 
         2 ) echo "Installing TeX and recommended packages.";
-            yay -S texlive-basic texlive-latex texlive-latexextra texlive-latexrecommended texlive-mathscience texlive-xelatex;
+            yay -S texlive-basic texlive-latex texlive-latexextra texlive-latexrecommended texlive-mathscience texlive-xelatex latex-mk;
             break;;
 
         3 ) echo "Installing texlive-full.";
