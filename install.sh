@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # TODO: Change default make jobs to $(nproc)
 # TODO: Add prompt for chaotic-aur
@@ -36,19 +36,19 @@ fi
 # TeX installation and packages
 while true; do
     if [[ $1 = "all" ]]; then
-        echo "Installing texlive-full...";
-        yay -S texlive-full;
+        echo "Installing texlive-full..."
+        yay -S texlive-full
         break;
     fi
 
-    echo "Do you want to install TeX?";
-    echo "(If you don't know what this is, skip it.)";
-    echo "0. Skip (Default)";
-    echo "1. Basic (only texlive-basic)";
-    echo "2. Recommended";
-    echo "3. Full";
-    echo "";
-    printf "Select option (0/1/2/3) ";
+    echo "Do you want to install TeX?"
+    echo "(If you don't know what this is, skip it.)"
+    echo "0. Skip (Default)"
+    echo "1. Basic (only texlive-basic)"
+    echo "2. Recommended"
+    echo "3. Full"
+    echo ""
+    printf "Select option (0/1/2/3) "
     read yn
 
     case $yn in
@@ -71,3 +71,4 @@ while true; do
 done
 
 # TODO: Add check for AMD hardware + Gigabyte motherboard, and conditional prompt for GPP0 wake fix
+# https://wiki.archlinux.org/title/Power_management/Wakeup_triggers#Instantaneous_wakeups_from_suspend
