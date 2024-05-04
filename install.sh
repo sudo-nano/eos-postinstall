@@ -29,7 +29,7 @@ done
 
 if [ $utils = "yes" ]; then
     # Note: timeshift requires cronie which conflicts with fcron
-    yay -S pacseek btop ncdu timeshift;
+    yay -S pacseek btop ncdu timeshift fastfetch;
 fi
 
 
