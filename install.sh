@@ -41,6 +41,7 @@ while true; do
         break;
     fi
 
+    echo ""
     echo "Do you want to install TeX?"
     echo "(If you don't know what this is, skip it.)"
     echo "0. Skip (Default)"
@@ -70,5 +71,39 @@ while true; do
     esac
 done
 
-# TODO: Add check for AMD hardware + Gigabyte motherboard, and conditional prompt for GPP0 wake fix
+# Check for AMD hardware + Gigabyte motherboard, and conditional prompt for GPP0 wake fix
 # https://wiki.archlinux.org/title/Power_management/Wakeup_triggers#Instantaneous_wakeups_from_suspend
+
+echo ""
+echo "The install script will now check your hardware for a few known bugs."
+echo "This will require your sudo password."
+
+mb_mfg_check=$(sudo dmidecode -t baseboard | grep -i "manufacturer" | grep -i "gigabyte" | xargs)
+mb_model_check=$(sudo dmidecode -t baseboard | grep -i "product name" | grep -i "B550" | xargs)
+
+if [[ $mb_mfg_check != "" ]]; then
+    if [[ $mb_model_check != "" ]]; then
+        while true; do
+            echo ""
+            echo "Warning: Gigabyte B550 motherboard detected!"
+            echo "There is a known bug with this hardware that wakes the system immediately after sleeping."
+            echo "It can be fixed easily in software."
+            echo ""
+            printf "Implement fix? (Y/n) "
+            read yn
+
+            case $yn in
+                y | Y | yes | "" ) echo "Fix not yet implemented. Please read the script comments to find the Arch wiki page with the fix.";
+                    break;;
+
+                n | N | no ) echo "Skipping fix.";
+                    break;;
+
+                * ) echo "Invalid response. Please provide y/n.";;
+            esac
+        done
+    fi
+fi
+
+echo ""
+echo "Done. Enjoy EndeavourOS!"
