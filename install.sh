@@ -29,7 +29,35 @@ done
 
 if [ $utils = "yes" ]; then
     # Note: timeshift requires cronie which conflicts with fcron
+    # EndeavourOS does not come with a cron program, so if timeshift is ever removed from this
+    # script, cronie should be added back in.
     yay -S pacseek btop ncdu timeshift fastfetch;
+fi
+
+# Enable bluetooth
+while true; do
+    if [[ $1 = "all" ]]; then
+        enable_bt="yes"
+        break
+    fi
+
+    printf "Enable bluetooth? (Y/n) "
+    read yn
+
+    case $yn in
+        y | Y | yes | "" ) echo "Enabling bluetooth.";
+            enable_bt="yes";
+            break;;
+
+        n | N | no ) echo "Skipping enabling bluetooth. You will need to run 'systemctl enable bluetooth && systemctl start bluetooth' to connect bluetooth devices.";
+            enable_bt="no";
+            break;;
+    esac
+done
+
+if [[ $enable_bt = "yes" ]]; then
+    systemctl enable bluetooth
+    systemctl start bluetooth
 fi
 
 
