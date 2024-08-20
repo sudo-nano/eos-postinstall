@@ -104,7 +104,7 @@ done
 
 echo ""
 echo "The install script will now check your hardware for a few known bugs."
-echo "This will require your sudo password."
+echo "This will require superuser privileges."
 
 mb_mfg_check=$(sudo dmidecode -t baseboard | grep -i "manufacturer" | grep -i "gigabyte" | xargs)
 mb_model_check=$(sudo dmidecode -t baseboard | grep -i "product name" | grep -i "B550" | xargs)
@@ -132,6 +132,8 @@ if [[ $mb_mfg_check != "" ]]; then
         done
     fi
 fi
+
+# TODO: install ttf-comic-sans
 
 echo ""
 echo "Done. Enjoy EndeavourOS!"
