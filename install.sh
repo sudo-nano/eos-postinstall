@@ -121,6 +121,7 @@ if [[ $mb_mfg_check != "" ]]; then
             read yn
 
             case $yn in
+            	# TODO: Implement fix 
                 y | Y | yes | "" ) echo "Fix not yet implemented. Please read the script comments to find the Arch wiki page with the fix.";
                     break;;
 
